@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 import { containsPotentialDecorator } from './index.js';
 
 describe('containsPotentialDecorator', () => {
-  test('находит inline-декораторы и декораторы class expression', () => {
+  test('finds inline decorators and class expression decorators', () => {
     expect(containsPotentialDecorator('export default @dec class {}')).toBe(
       true,
     );
@@ -11,13 +11,13 @@ describe('containsPotentialDecorator', () => {
     );
   });
 
-  test('находит parameter decorators', () => {
+  test('finds parameter decorators', () => {
     expect(containsPotentialDecorator('constructor(@inject() service)')).toBe(
       true,
     );
   });
 
-  test('игнорирует строки и комментарии', () => {
+  test('ignores strings and comments', () => {
     expect(containsPotentialDecorator("const email = 'user@example.com';")).toBe(
       false,
     );
@@ -29,7 +29,7 @@ describe('containsPotentialDecorator', () => {
     ).toBe(false);
   });
 
-  test('консервативно обрабатывает template literal', () => {
+  test('conservatively handles template literals', () => {
     expect(containsPotentialDecorator('const value = `@media ${name}`;')).toBe(
       true,
     );
