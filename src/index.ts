@@ -2,13 +2,13 @@ import { transform, type JscTarget } from '@swc/core';
 import type { Plugin } from 'vite';
 
 export type SwcDecoratorsPluginOptions = {
-  /** Версия стандартных декораторов, которую понимает SWC. */
+  /** Standard decorators version supported by SWC. */
   decoratorVersion?: '2021-12' | '2022-03' | '2023-11';
-  /** Целевой ECMAScript для результата SWC. */
+  /** Target ECMAScript version for the SWC output. */
   target?: JscTarget;
-  /** Семантика инициализации class fields. */
+  /** Class fields initialization semantics. */
   useDefineForClassFields?: boolean;
-  /** Подключать общие SWC helpers вместо инлайна. */
+  /** Use shared SWC helpers instead of inlining them. */
   externalHelpers?: boolean;
 };
 
@@ -16,13 +16,13 @@ const JS_FILE_RE = /\.m?[jt]sx?(\?.*)?$/;
 const NODE_MODULES_RE = /(?:^|\/|\\)node_modules(?:\/|\\)/;
 
 /**
- * Находит потенциальный декоратор, не ограничивая его началом строки.
+ * Finds a potential decorator without requiring it to start a line.
  *
- * Декораторы могут быть inline, применяться к class expression или находиться
- * у параметра конструктора. Для гарантии не пропустить легальный синтаксис
- * пропускаются только строковые литералы и комментарии. Ложные срабатывания
- * внутри regex или template literal безопасны: SWC обработает файл повторно,
- * но не изменит его семантику.
+ * Decorators can be inline, applied to a class expression, or placed on a
+ * constructor parameter. To avoid missing valid syntax, only string literals
+ * and comments are skipped. False positives inside regexes or template
+ * literals are safe: SWC will process the file again without changing its
+ * semantics.
  */
 export function containsPotentialDecorator(source: string): boolean {
   let index = 0;
