@@ -3,7 +3,7 @@ import type { Plugin } from 'vite';
 
 export type SwcDecoratorsPluginOptions = {
   /** Версия стандартных декораторов, которую понимает SWC. */
-  decoratorVersion?: '2022-03';
+  decoratorVersion?: '2021-12' | '2022-03' | '2023-11';
   /** Целевой ECMAScript для результата SWC. */
   target?: JscTarget;
   /** Семантика инициализации class fields. */

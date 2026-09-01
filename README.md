@@ -14,10 +14,15 @@ pnpm add -D swc-decorators-plugin
 
 ## Usage
 
+Add the plugin to your Vite configuration, usually in `vite.config.ts` at the
+project root:
+
 ```ts
+// vite.config.ts
+import { defineConfig } from 'vite';
 import { swcDecoratorsPlugin } from 'swc-decorators-plugin';
 
-export default {
+export default defineConfig({
   plugins: [
     swcDecoratorsPlugin({
       decoratorVersion: '2022-03',
@@ -26,12 +31,39 @@ export default {
       externalHelpers: true,
     }),
   ],
-};
+});
 ```
 
-The detector scans source text without building an AST. It ignores comments and
-quoted strings, and conservatively sends possible decorator-containing modules
-to SWC. Modules without a potential decorator are left to Vite/Oxc.
+Then run Vite as usual:
+
+```bash
+pnpm dev
+```
+
+For a JavaScript project, use `vite.config.js` or `vite.config.mjs`; the import
+and configuration remain the same. If your configuration already includes other
+Vite plugins, add `swcDecoratorsPlugin()` to the same `plugins` array.
+
+For example, with React:
+
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { swcDecoratorsPlugin } from 'swc-decorators-plugin';
+
+export default defineConfig({
+  plugins: [
+    react(),
+    swcDecoratorsPlugin({
+      decoratorVersion: '2022-03',
+      target: 'es2024',
+      useDefineForClassFields: true,
+      externalHelpers: true,
+    }),
+  ],
+});
+```
 
 ## License
 
