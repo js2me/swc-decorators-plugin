@@ -1,8 +1,8 @@
 {
   "name": "swc-decorators-plugin",
   "version": "0.0.1",
-  "description": "Vite plugin that runs SWC only for modules containing decorators",
-  "homepage": "https://github.com/js2me/swc-decorators-plugin",
+  "description": "Vite plugin that uses SWC only for modules containing standard decorators",
+  "homepage": "https://github.com/js2me/swc-decorators-plugin#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/js2me/swc-decorators-plugin.git"
@@ -19,15 +19,33 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/index.d.ts.map"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "check": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run",
     "prepublishOnly": "pnpm check && pnpm test && pnpm build"
   },
-  "keywords": ["vite", "swc", "decorators", "typescript", "rolldown"],
-  "author": "js2me",
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "swc",
+    "decorators",
+    "standard-decorators",
+    "stage-3-decorators",
+    "typescript",
+    "javascript",
+    "class-fields",
+    "rolldown"
+  ],
+  "author": {
+    "name": "js2me",
+    "url": "https://github.com/js2me"
+  },
   "license": "MIT",
   "sideEffects": false,
   "engines": {

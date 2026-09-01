@@ -2,7 +2,7 @@ name: Version or Publish
 
 on:
   workflow_run:
-    workflows: ["Build and test"]
+    workflows: ["Builds & tests"]
     types: [completed]
 
 concurrency: ${{ github.workflow }}
@@ -36,6 +36,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build package
+        run: pnpm build
+
       - name: Create release pull request or publish
         uses: changesets/action@v1
         with:
@@ -45,4 +48,3 @@ jobs:
         env:
           CI: true
           GITHUB_TOKEN: ${{ github.token }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

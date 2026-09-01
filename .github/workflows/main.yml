@@ -1,4 +1,4 @@
-name: Build and test
+name: Builds & tests
 
 on:
   push:
@@ -27,8 +27,8 @@ jobs:
       - name: Check types
         run: pnpm check
 
-      - name: Run tests
-        run: pnpm test
-
       - name: Build package
         run: pnpm build
+
+      - name: Run tests
+        run: pnpm test
